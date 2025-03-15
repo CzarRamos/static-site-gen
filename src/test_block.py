@@ -11,19 +11,19 @@ class TextBlock(unittest.TestCase):
         paragraph_sample = "This is just plain text"
         self.assertEqual(block_to_block_type(paragraph_sample), BlockType.PARAGRAPH)
 
-        not_heading_sample = "#This is not a header"
+        not_heading_sample = "#This is a paragraph"
         self.assertEqual(block_to_block_type(not_heading_sample), BlockType.PARAGRAPH)
 
-        not_code_sample = "``` This is not a code block ``"
+        not_code_sample = "``` This is also a paragraph ``"
         self.assertEqual(block_to_block_type(not_code_sample), BlockType.PARAGRAPH)
 
-        not_quote_sample = "T>his is not a quote"
+        not_quote_sample = "T>his is another paragraph"
         self.assertEqual(block_to_block_type(not_quote_sample), BlockType.PARAGRAPH)
 
-        not_unordered_list_sample = "-This is not an ordered list\n- all items in the list needs a space after the dash"
+        not_unordered_list_sample = "-This is a paragraph because\n- all items in the list needs a space after the dash"
         self.assertEqual(block_to_block_type(not_unordered_list_sample), BlockType.PARAGRAPH)
 
-        not_ordered_list_sample = "1. This is not\n2. An ordered\n33. List"
+        not_ordered_list_sample = "1. This is a paragraph and\n2. Not an ordered\n33. List"
         self.assertEqual(block_to_block_type(not_code_sample), BlockType.PARAGRAPH) 
 
         # HEADER
@@ -33,8 +33,8 @@ class TextBlock(unittest.TestCase):
         heading2_sample = "## This also a header"
         self.assertEqual(block_to_block_type(heading2_sample), BlockType.HEADING)
 
-        heading_extreme_sample = "########################## This is still a header"
-        self.assertEqual(block_to_block_type(heading_extreme_sample), BlockType.HEADING)
+        heading_extreme_sample = "####### This is Not a header" # seven or more symbols isnt a header anymore
+        self.assertNotEqual(block_to_block_type(heading_extreme_sample), BlockType.HEADING)
 
         misplaced_symbol_heading_sample = "T# his is NOT a header"
         self.assertNotEqual(block_to_block_type(misplaced_symbol_heading_sample), BlockType.HEADING)
@@ -66,6 +66,9 @@ class TextBlock(unittest.TestCase):
 
         extra_symbol2_in_code_sample = "```This is still NOT a code block````"
         self.assertNotEqual(block_to_block_type(extra_symbol2_in_code_sample), BlockType.CODE)
+
+        extra_symbol3_in_code_sample = "```This is not ``` a valid code block```"
+        self.assertNotEqual(block_to_block_type(extra_symbol3_in_code_sample), BlockType.CODE)
 
         # QUOTE
         quote_sample = ">This is a quote"

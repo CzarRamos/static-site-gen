@@ -13,7 +13,6 @@ class TestHTMLNode(unittest.TestCase):
         self.assertNotEqual(htmlnode, htmlnode3)
         self.assertNotEqual(htmlnode, htmlnode4)
         self.assertNotEqual(htmlnode, htmlnode5)
-        print(htmlnode3.props_to_html())
 
 
 if __name__ == "__main__":
