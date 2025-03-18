@@ -3,10 +3,11 @@ from textnode import TextType
 import os
 import re
 import shutil
+import sys
 from generatepage import generate_pages_recursive
 
 STATIC_FOLDER_PATH = "./static"
-PUBLIC_FOLDER_PATH = "./public"
+PUBLIC_FOLDER_PATH = "./docs"
 MARKDOWN_CONTENT_PATH = "content"
 HTML_TEMPLATE_PATH = "./template.html"
 
@@ -31,6 +32,11 @@ def copy_static_to_public_folder(path):
                 shutil.copy(src, dst)
 
 def main():
+    # Grab basepath
+    BASEPATH ="/"
+    if sys.argv[0] != "":
+        BASEPATH = sys.argv[0]        
+
     # recreate public folder
     if os.path.exists(PUBLIC_FOLDER_PATH):
         # delete public folder for regeneration
@@ -45,7 +51,7 @@ def main():
     # But I wanted to familiarize myself with the os and shutils library
     #shutil.copytree(STATIC_FOLDER_PATH, PUBLIC_FOLDER_PATH)
     
-    generate_pages_recursive("./content", HTML_TEMPLATE_PATH, PUBLIC_FOLDER_PATH)
+    generate_pages_recursive("./content", HTML_TEMPLATE_PATH, PUBLIC_FOLDER_PATH, BASEPATH)
     
 
 if __name__ == "__main__":
