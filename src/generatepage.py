@@ -23,7 +23,7 @@ def generate_page(from_path, template_path, dest_path, BASEPATH):
     template_file = re.sub(r'{{ Title }}', title, template_file)
     template_file = re.sub(r'{{ Content }}', html_contents, template_file)
     template_file = re.sub(r'href="/', f'href="{BASEPATH}', template_file)
-    template_file = re.sub(r'src="/', f'href="{BASEPATH}', template_file)
+    template_file = re.sub(r'src="/', f'src="{BASEPATH}', template_file)
 
     # Make sure dest path exists:
     if not os.path.exists(dest_path):
