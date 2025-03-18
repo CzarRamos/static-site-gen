@@ -34,8 +34,8 @@ def copy_static_to_public_folder(path):
 def main():
     # Grab basepath
     BASEPATH ="/"
-    if sys.argv[0] != "":
-        BASEPATH = sys.argv[0]        
+    if len(sys.argv) > 1:
+        BASEPATH = sys.argv[1]        
 
     # recreate public folder
     if os.path.exists(PUBLIC_FOLDER_PATH):
