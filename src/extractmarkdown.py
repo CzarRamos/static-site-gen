@@ -163,3 +163,5 @@ def markdown_to_html_node(markdown):
                 raise ValueError(f"'{block}' does not have a valid block type")
     return ParentNode(DIV_TAG, output_nodes)
 
+def get_html_string_from_markdown(markdown):
+    return markdown_to_html_node(markdown).to_html()
